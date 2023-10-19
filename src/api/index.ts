@@ -1,17 +1,21 @@
 import { Router } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { authenticate, ConfigModule, registerOverriddenValidators } from "@medusajs/medusa";
+import {
+  authenticate,
+  ConfigModule,
+  registerOverriddenValidators,
+} from "@medusajs/medusa";
 import { getConfigFile } from "medusa-core-utils";
 import { attachStoreRoutes } from "./routes/store";
 import { attachAdminRoutes } from "./routes/admin";
 
-import { AdminPostProductsProductReq } from "./routes/admin/products/edit-product";
-
+import { AdminPostProductsProductReq } from "./routes/admin/products/update-product";
 
 export default (rootDirectory: string): Router | Router[] => {
   // Read currently-loaded medusa config
 
+  //
   registerOverriddenValidators(AdminPostProductsProductReq);
 
   const { configModule } = getConfigFile<ConfigModule>(
@@ -22,12 +26,12 @@ export default (rootDirectory: string): Router | Router[] => {
 
   // Set up our CORS options objects, based on config
   const storeCorsOptions = {
-    origin: true,
+    origin: projectConfig.store_cors,
     credentials: true,
   };
 
   const adminCorsOptions = {
-    origin: true,
+    origin: projectConfig.admin_cors,
     credentials: true,
   };
 
