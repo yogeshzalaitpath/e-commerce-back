@@ -11,12 +11,14 @@ import { attachStoreRoutes } from "./routes/store";
 import { attachAdminRoutes } from "./routes/admin";
 
 import { AdminPostProductsProductReq } from "./routes/admin/products/update-product";
+import { AdminPostProductsReq } from "./routes/admin/products/create-product";
 
 export default (rootDirectory: string): Router | Router[] => {
   // Read currently-loaded medusa config
 
-  //
+  // Admin api overrides
   registerOverriddenValidators(AdminPostProductsProductReq);
+  registerOverriddenValidators(AdminPostProductsReq);
 
   const { configModule } = getConfigFile<ConfigModule>(
     rootDirectory,
