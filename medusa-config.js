@@ -40,6 +40,38 @@ const plugins = [
       upload_dir: "uploads",
     },
   },
+  {
+    resolve: `medusa-plugin-algolia`,
+    options: {
+      applicationId: process.env.ALGOLIA_APP_ID,
+      adminApiKey: process.env.ALGOLIA_ADMIN_API_KEY,
+      settings: {
+        products: {
+          indexSettings: {
+            searchableAttributes: ["title"],
+            attributesToRetrieve: [
+              "id",
+              "title",
+              "description",
+              // "handle",
+              // "thumbnail",
+              // "variants",
+              // "variant_sku",
+              // "options",
+              // "collection_title",
+              // "collection_handle",
+              "images",
+            ],  
+          },
+         transformer: (product) => ({ 
+          objectID: product.id, 
+          // other attributes...
+        }),
+
+        },
+    },
+  },
+},
   // {
   //   resolve: "@medusajs/admin",
   //   /** @type {import('@medusajs/admin').PluginOptions} */
@@ -51,6 +83,7 @@ const plugins = [
   //     enableUI: true,
   //   },
   // },
+    
 ];
 
 const modules = {
