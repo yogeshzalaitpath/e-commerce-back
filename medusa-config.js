@@ -53,15 +53,16 @@ const plugins = [
               "id",
               "title",
               "description",
-              "images",
+              "handle",
+              "thumbnail"
             ],
           },
           transformer: (product) => ({ 
             objectID: product.id, 
             title: product.title,
             description: product.description,
-            images: product.images || [], // Make sure product.images is an array, or handle it appropriately.
-            // Add other attributes here as needed.
+            handle:product.handle,
+            thumbnail:product.thumbnail
           }),
         },
       },
