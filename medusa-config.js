@@ -38,34 +38,46 @@ const plugins = [
     resolve: `@medusajs/file-local`,
     options: {
       upload_dir: "uploads",
+      enableUI: true,
+    },
+  },
+  {
+    resolve: `medusa-file-cloudinary`,
+    options: {
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+      secure: true,
+      enableUI: true,
     },
   },
   {
     resolve: `medusa-plugin-algolia`,
     options: {
-      applicationId: process.env.ALGOLIA_APP_ID ,
-      adminApiKey: process.env.ALGOLIA_ADMIN_API_KEY ,
+      applicationId: process.env.ALGOLIA_APP_ID,
+      adminApiKey: process.env.ALGOLIA_ADMIN_API_KEY,
       settings: {
         products: {
           indexSettings: {
-            searchableAttributes: ["title","description"],
+            searchableAttributes: ["title", "description"],
             attributesToRetrieve: [
               "id",
               "title",
               "description",
               "handle",
-              "thumbnail"
+              "thumbnail",
             ],
           },
-          transformer: (product) => ({ 
-            objectID: product.id, 
+          transformer: (product) => ({
+            objectID: product.id,
             title: product.title,
             description: product.description,
-            handle:product.handle,
-            thumbnail:product.thumbnail
+            handle: product.handle,
+            thumbnail: product.thumbnail,
           }),
         },
       },
+      enableUI: true,
     },
   },
 ];
