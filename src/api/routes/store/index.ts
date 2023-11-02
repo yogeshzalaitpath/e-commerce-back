@@ -9,8 +9,8 @@ const router = Router();
 export function attachStoreRoutes(storeRouter: Router) {
   // Attach our router to a custom path on the store router
   storeRouter.use("/custom", router);
-  storeRouter.use("/reviews", GET);
   storeRouter.use("/reviews", POST);
+  // storeRouter.use("/reviews", POST);
   // Define a GET endpoint on the root route of our custom path
   router.get("/", wrapHandler(customRouteHandler));
 }
